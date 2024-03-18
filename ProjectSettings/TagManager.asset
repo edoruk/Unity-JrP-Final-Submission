@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StoneCircle
   - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX

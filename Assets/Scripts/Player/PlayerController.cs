@@ -6,53 +6,47 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float movementSpeed = 2.0f;
     private float rotationSpeed = 2.0f;
-    public float _jumpForce = 5.0f;
+    public float _jumpForce = 4.0f;
+    public float distanceToAttack;
     
     private Animator _animator;
     private UIController _uiControllerScript;
     private Rigidbody _playerRb;
 
-    private bool isOnGround = true;
-    private bool isRunning = false;
-    
 
-    
-    // Start is called before the first frame update
+
+    private bool isOnGround = true;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
         _uiControllerScript = GameObject.Find("UIManager").GetComponent<UIController>();
         _playerRb = GetComponent<Rigidbody>();
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         MovePlayer();
+        RunMovementAnimations();
+        FindAndKillEnemiesInRange();
     }
 
     private void MovePlayer()
     {
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
+        float movementSpeed = Input.GetKey(KeyCode.LeftShift) ? 4.0f : 2.0f;
         
         transform.Translate(Vector3.forward * verticalInput * movementSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * horizontalInput * rotationSpeed);
-        
-        
-        if (Input.GetKey(KeyCode.UpArrow))
+    }
+
+    private void RunMovementAnimations()
+    {
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                _animator.SetFloat("movementSpeed",0.6f);
-            }
-            else
-            {
-                _animator.SetFloat("movementSpeed",0.3f);
-            }
+            _animator.SetFloat("movementSpeed", Input.GetKey(KeyCode.LeftShift) ? 0.6f : 0.3f);
         }
         else
         {
@@ -61,9 +55,24 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
+            isOnGround = false;
             _playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _animator.SetTrigger("jumpTrigger");
-            isOnGround = false;
+        }
+    }
+
+    
+    private void FindAndKillEnemiesInRange()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, distanceToAttack);
+        int count = 0;
+        foreach (var collider in colliders)
+        {
+            if (collider.tag == "Enemy" && Input.GetKeyDown(KeyCode.X))
+            {
+                Destroy(collider.gameObject);
+                Debug.Log(collider.tag + " destroyed");
+            }
         }
     }
 
@@ -86,7 +95,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
-            isOnGround = true;
+        switch (other.gameObject.tag)
+        {
+            case "Ground":
+                isOnGround = true;
+                break;
+        }
     }
 }
