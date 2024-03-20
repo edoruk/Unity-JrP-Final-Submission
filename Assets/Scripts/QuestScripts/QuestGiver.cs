@@ -8,6 +8,8 @@ public class QuestGiver : MonoBehaviour
     public Quest quest;
     public PlayerController player;
 
+    private bool onTrigger;
+
     public string title;
     public string description;
     public int expReward;
@@ -29,6 +31,11 @@ public class QuestGiver : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        GiveQuestToPlayer();
+    }
+
     public void AcceptQuest()
     {
         quest.IsActive = true;
@@ -39,6 +46,18 @@ public class QuestGiver : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
+            onTrigger = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+            onTrigger = false;
+    }
+
+    private void GiveQuestToPlayer()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && onTrigger)
         {
             AcceptQuest();
         }

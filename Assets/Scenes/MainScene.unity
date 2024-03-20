@@ -2332,7 +2332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764601738}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000004431486, y: 0.98888296, z: -0.14869598, w: 0.000000029471012}
+  m_LocalRotation: {x: -0.000000004431486, y: 0.98888296, z: -0.14869598, w: -0.000000029471012}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3785,8 +3785,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136385240}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000000014986203, y: 0.9990491, z: -0.043599047, w: -0.000000034340097}
-  m_LocalPosition: {x: -2.59, y: 1.3408575, z: 0.35708287}
+  m_LocalRotation: {x: 0.0000000015126246, y: 0.9990491, z: -0.043599047, w: 0.000000034661003}
+  m_LocalPosition: {x: -2.59, y: 1.3408575, z: 0.35708284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4529,7 +4529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371093821}
   serializedVersion: 2
-  m_LocalRotation: {x: -7.4668977e-10, y: 0.9990491, z: -0.04359904, w: -0.000000017110004}
+  m_LocalRotation: {x: 7.571899e-10, y: 0.9990491, z: -0.043599043, w: 0.000000017350608}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7168,18 +7168,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 407575211}
-    - target: {fileID: 1035531304225421483, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: quest.QuestGoal.questType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1035531304225421483, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: quest.QuestGoal.goalAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1035531304225421483, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: quest.QuestGoal.currentAmount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.0445383
@@ -7223,10 +7211,6 @@ PrefabInstance:
     - target: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_Name
       value: QuestGiver
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

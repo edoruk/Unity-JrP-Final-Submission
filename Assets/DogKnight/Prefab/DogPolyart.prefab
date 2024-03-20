@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 2153920540933667000}
   m_Layer: 0
   m_Name: DogPolyart
-  m_TagString: Player
+  m_TagString: QuestGiver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1319,6 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cec89e06deb42d7ae92c96c68c418c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quest: {}
   player: {fileID: 0}
   title: 
   description: 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField]private TextMeshProUGUI _usageText;
-    private string _usageTextBase = "Press E to use ";
+    private string _usageTextBase = "Press E to ";
     
     // Start is called before the first frame update
     void Start()
@@ -15,9 +15,9 @@ public class UIController : MonoBehaviour
         _usageText.enabled = false;
     }
 
-    public void SetUsageText(Collider other)
+    public void SetUsageText(string verb, Collider other)
     {
-        _usageText.text += other.gameObject.name;
+        _usageText.text += verb + other.gameObject.name;
         _usageText.enabled = true;
     }
 

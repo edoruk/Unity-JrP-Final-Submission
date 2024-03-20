@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - Enemy
   - EnemyCanvas
+  - EnemyTurtle
+  - EnemySlime
+  - QuestGiver
   layers:
   - Default
   - TransparentFX

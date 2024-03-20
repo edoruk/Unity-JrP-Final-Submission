@@ -284,9 +284,10 @@ GameObject:
   - component: {fileID: 2799579027121661460}
   - component: {fileID: 865043862024005805}
   - component: {fileID: 2198143168560418100}
+  - component: {fileID: 3059015048079519095}
   m_Layer: 0
   m_Name: Enemy_Turtle
-  m_TagString: Enemy
+  m_TagString: EnemyTurtle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,6 +364,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 4.0519953
   m_Center: {x: 0, y: 0.3954363, z: -0.15956199}
+--- !u!114 &3059015048079519095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891453149101386977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5cfc0f74e6f4f7b955726032dbcb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Health: 0
+  TakenDamage: 0
 --- !u!1 &2817765239641164753
 GameObject:
   m_ObjectHideFlags: 0

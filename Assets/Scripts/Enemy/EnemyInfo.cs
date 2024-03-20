@@ -14,6 +14,7 @@ public class EnemyInfo : MonoBehaviour
     private TextMeshProUGUI _enemyNameText;
     private Transform _enemyRoot;
     private PlayerController player;
+    private Enemy _enemy;
     
 
     // Start is called before the first frame update
@@ -26,6 +27,8 @@ public class EnemyInfo : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         string cloneText = "(Clone)";
         _enemyNameText.text = _enemyRoot.gameObject.name.Replace(cloneText,"");
+        
+
 
     }
 
@@ -33,6 +36,8 @@ public class EnemyInfo : MonoBehaviour
     {
         transform.LookAt(transform.forward + _camera.position);
         transform.Rotate(0,180,0);
+        
+        
         if (slider.value <= 0)
         {
             Destroy(_enemyRoot.gameObject);
@@ -51,20 +56,31 @@ public class EnemyInfo : MonoBehaviour
 
     void Start()
     {
-        
+        ChooseEnemyTagAndSetSliderMax();
     }
 
     // Update is called once per frame
     void Update()
     {
+        slider.value = _enemy.Health / _enemy.MaxHealth;
     }
 
-    public void ShowInfo()
+    private void ChooseEnemyTagAndSetSliderMax()
     {
+        GameObject enemyRoot = _enemyRoot.gameObject;
+        if (enemyRoot.CompareTag("EnemySlime"))
+        {
+            _enemy = enemyRoot.GetComponent<Slime>();
+        }
+        else if(enemyRoot.CompareTag("EnemyTurtle"))
+        {
+            _enemy = enemyRoot.GetComponent<Turtle>();
+        }
     }
 
-    public void UpdateHealthBar(float attackValue)
+    public void Attack()
     {
-        slider.value -= 0.3f;
+        _enemy.TakeDamage();
+        Debug.Log(_enemy.Name + " took " + _enemy.TakenDamage + " damage.");
     }
 }

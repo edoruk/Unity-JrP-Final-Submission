@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private float rotationSpeed = 2.0f;
     public float _jumpForce = 4.0f;
-    public float distanceToAttack;
+    public float distanceToAttack = 1.5f;
     
     private Animator _animator;
     private UIController _uiControllerScript;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         RunMovementAnimations();
-        FindAndKillEnemiesInRange(0.3f);
+        FindAndKillEnemiesInRange();
     }
 
     private void MovePlayer()
@@ -64,27 +64,38 @@ public class PlayerController : MonoBehaviour
     }
 
     
-    private void FindAndKillEnemiesInRange(float attackValue)
+    private void FindAndKillEnemiesInRange()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, distanceToAttack);
         foreach (var collider in colliders)
         {
-            if (collider.tag == "Enemy" && Input.GetKeyDown(KeyCode.X))
+            if (collider.tag == "EnemyTurtle" || collider.tag == "EnemySlime")
             {
                 _enemyInfo = collider.gameObject.GetComponentInChildren<EnemyInfo>();
                 _canvas = collider.gameObject.GetComponentInChildren<CanvasGroup>();
-                _enemyInfo.UpdateHealthBar(attackValue);
-                _canvas.alpha = 1;
+                
+                float distanceToEnemy = Vector3.Distance(transform.position, collider.transform.position);
+
+                
+                if (Input.GetKeyDown(KeyCode.X) && distanceToEnemy <= distanceToAttack)
+                {
+                    _enemyInfo.Attack();
+                }
+                
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("StoneCircle"))
+        switch (other.gameObject.tag)
         {
-            _uiControllerScript.SetUsageText(other);
-            Debug.Log(other.gameObject.name + " triggered");
+            case "StoneCircle":
+                _uiControllerScript.SetUsageText("use", other);
+                break;
+            case "QuestGiver":
+                _uiControllerScript.SetUsageText("interact", other);
+                break;
         }
     }
 
