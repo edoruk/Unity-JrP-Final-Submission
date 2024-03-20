@@ -101,9 +101,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("StoneCircle"))
+        switch (other.gameObject.tag)
         {
-            _uiControllerScript.ResetUsageText();
+            case "StoneCircle":
+                _uiControllerScript.ResetUsageText();
+                break;
+            case "QuestGiver":
+                _uiControllerScript.ResetUsageText();
+                break;
         }
     }
 
