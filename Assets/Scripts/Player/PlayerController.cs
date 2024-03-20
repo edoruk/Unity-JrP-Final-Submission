@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +11,10 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private UIController _uiControllerScript;
     private Rigidbody _playerRb;
+    private EnemyInfo _enemyInfo;
+    private CanvasGroup _canvas;
+
+    public Quest quest;
 
 
 
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         RunMovementAnimations();
-        FindAndKillEnemiesInRange();
+        FindAndKillEnemiesInRange(0.3f);
     }
 
     private void MovePlayer()
@@ -62,16 +64,17 @@ public class PlayerController : MonoBehaviour
     }
 
     
-    private void FindAndKillEnemiesInRange()
+    private void FindAndKillEnemiesInRange(float attackValue)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, distanceToAttack);
-        int count = 0;
         foreach (var collider in colliders)
         {
             if (collider.tag == "Enemy" && Input.GetKeyDown(KeyCode.X))
             {
-                Destroy(collider.gameObject);
-                Debug.Log(collider.tag + " destroyed");
+                _enemyInfo = collider.gameObject.GetComponentInChildren<EnemyInfo>();
+                _canvas = collider.gameObject.GetComponentInChildren<CanvasGroup>();
+                _enemyInfo.UpdateHealthBar(attackValue);
+                _canvas.alpha = 1;
             }
         }
     }

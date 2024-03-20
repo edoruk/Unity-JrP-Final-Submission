@@ -1,15 +1,25 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private int layer = 10;
-    private int layerAsLayerMask;
+    private CanvasGroup _canvasGroup;
 
     private void Start()
     {
-        layerAsLayerMask = (1 << layer);
+        _canvasGroup = GetComponentInChildren<CanvasGroup>();
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        _canvasGroup.alpha = 1;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _canvasGroup.alpha = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
