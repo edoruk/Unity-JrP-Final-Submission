@@ -379,6 +379,7 @@ MonoBehaviour:
   Name: 
   Health: 0
   TakenDamage: 0
+  MaxHealth: 0
 --- !u!1 &2817765239641164753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,6 +1308,14 @@ PrefabInstance:
     - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3775973658586243658, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
       propertyPath: m_IsActive

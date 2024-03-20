@@ -91,10 +91,10 @@ public class PlayerController : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "StoneCircle":
-                _uiControllerScript.SetUsageText("use", other);
+                _uiControllerScript.SetUsageText("use ", other);
                 break;
             case "QuestGiver":
-                _uiControllerScript.SetUsageText("interact", other);
+                _uiControllerScript.SetUsageText("interact ", other);
                 break;
         }
     }

@@ -1,18 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField]private TextMeshProUGUI _usageText;
+    [SerializeField] private TextMeshProUGUI _usageText;
+    [SerializeField] public Canvas _questCanvas;
+    [SerializeField] private TextMeshProUGUI _questTitle;
+    [SerializeField] private TextMeshProUGUI _questDescription;
+    [SerializeField] private QuestGiver _questGiver;
+    [SerializeField] private TextMeshProUGUI _questIsActive;
+    [SerializeField] public TextMeshProUGUI _questCompletedText;
+    
+    private Button _acceptQuestButton;
+    
+
     private string _usageTextBase = "Press E to ";
     
-    // Start is called before the first frame update
     void Start()
     {
         _usageText.text = _usageTextBase;
         _usageText.enabled = false;
+        _questCompletedText.enabled = false;
+        
+        SetAndHideQuestWindow();
+
+    }
+
+    private void Update()
+    {
+        SetIsActiveTextColor();
+        SetCompletedQuestWindow();
+    }
+
+    public void SetAndHideQuestWindow()
+    {
+        _acceptQuestButton = GameObject.Find("AcceptQuestButton").GetComponent<Button>();
+        
+        _questTitle.text = _questGiver.quest.Title;
+        _questDescription.text = _questGiver.quest.Description;
+        _questCanvas.enabled = false;
+    }
+
+    private void SetCompletedQuestWindow()
+    {
+        if (_questGiver.quest.QuestGoal.IsReached())
+        {
+            _questTitle.text = "";
+            _questDescription.text = "Hmm... Well done friend. Here, your reward...";
+        }
     }
 
     public void SetUsageText(string verb, Collider other)
@@ -25,5 +64,31 @@ public class UIController : MonoBehaviour
     {
         _usageText.SetText(_usageTextBase);
         _usageText.enabled = false;
+    }
+
+    public void CancelButtonClicked()
+    {
+        _questCanvas.enabled = false;
+    }
+
+    public void AcceptButtonClicked()
+    {
+        if (!_questGiver.quest.IsActive)
+        {
+            _questGiver.AcceptQuest();
+            _acceptQuestButton.enabled = false;
+            _acceptQuestButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            _acceptQuestButton.gameObject.SetActive(false);
+        }
+    }
+
+    private void SetIsActiveTextColor()
+    {
+        _questIsActive.color = _questGiver.quest.IsActive
+            ? Color.green
+            : Color.red;
     }
 }

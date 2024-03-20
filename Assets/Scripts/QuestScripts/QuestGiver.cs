@@ -7,6 +7,7 @@ public class QuestGiver : MonoBehaviour
 {
     public Quest quest;
     public PlayerController player;
+    public UIController uiController;
 
     private bool onTrigger;
 
@@ -18,6 +19,8 @@ public class QuestGiver : MonoBehaviour
 
     private void Start()
     {
+        uiController = GameObject.Find("UIManager").GetComponent<UIController>();
+        
         title = "Quest 1";
         description = "Kill 3 monster.";
         expReward = 20;
@@ -33,7 +36,8 @@ public class QuestGiver : MonoBehaviour
 
     private void Update()
     {
-        GiveQuestToPlayer();
+        ShowQuestToPlayer();
+        ShowQuestCompleted();
     }
 
     public void AcceptQuest()
@@ -55,11 +59,17 @@ public class QuestGiver : MonoBehaviour
             onTrigger = false;
     }
 
-    private void GiveQuestToPlayer()
+    private void ShowQuestToPlayer()
     {
         if (Input.GetKeyDown(KeyCode.E) && onTrigger)
         {
-            AcceptQuest();
+            uiController._questCanvas.enabled = true;
         }
+    }
+
+    private void ShowQuestCompleted()
+    {
+        if (quest.QuestGoal.IsReached())
+            uiController._questCompletedText.enabled = true;
     }
 }

@@ -349,8 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0c3563a4fc494996aa4032d549ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _health: 0
+  Name: 
+  Health: 0
+  TakenDamage: 0
+  MaxHealth: 0
 --- !u!1 &3439329834578177183
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,8 +646,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1946276050099407124}
     m_Modifications:
     - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432390592478297555, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3775973658586243658, guid: 6b6cfcef9f5a04135af938ae94a0a035, type: 3}
       propertyPath: m_IsActive
