@@ -42,7 +42,8 @@ public class UIController : MonoBehaviour
         
         _questTitle.text = _questGiver.quest.Title;
         _questDescription.text = _questGiver.quest.Description;
-        _questCanvas.enabled = false;
+        _questCanvas.gameObject.SetActive(false);
+        Debug.Log(_questDescription.text);
     }
 
     private void SetCompletedQuestWindow()
@@ -66,17 +67,11 @@ public class UIController : MonoBehaviour
         _usageText.enabled = false;
     }
 
-    public void CancelButtonClicked()
-    {
-        _questCanvas.enabled = false;
-    }
-
     public void AcceptButtonClicked()
     {
         if (!_questGiver.quest.IsActive)
         {
             _questGiver.AcceptQuest();
-            _acceptQuestButton.enabled = false;
             _acceptQuestButton.gameObject.SetActive(false);
         }
         else

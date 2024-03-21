@@ -1,5 +1,3 @@
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed = 2.0f;
     public float _jumpForce = 4.0f;
     public float distanceToAttack = 1.5f;
+    private float distanceToShow = 4.0f;
     
     private Animator _animator;
     private UIController _uiControllerScript;
@@ -15,9 +14,7 @@ public class PlayerController : MonoBehaviour
     private CanvasGroup _canvas;
 
     public Quest quest;
-
-
-
+    
     private bool isOnGround = true;
 
     void Start()
@@ -31,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         RunMovementAnimations();
+        ShowNearbyEnemyInfo();
         FindAndKillEnemiesInRange();
     }
 
@@ -72,10 +70,9 @@ public class PlayerController : MonoBehaviour
             if (collider.tag == "EnemyTurtle" || collider.tag == "EnemySlime")
             {
                 _enemyInfo = collider.gameObject.GetComponentInChildren<EnemyInfo>();
-                _canvas = collider.gameObject.GetComponentInChildren<CanvasGroup>();
+                
                 
                 float distanceToEnemy = Vector3.Distance(transform.position, collider.transform.position);
-
                 
                 if (Input.GetKeyDown(KeyCode.X) && distanceToEnemy <= distanceToAttack)
                 {
@@ -84,6 +81,30 @@ public class PlayerController : MonoBehaviour
                 
             }
         }
+    }
+
+    private void ShowNearbyEnemyInfo()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, distanceToShow);
+        foreach (var collider in colliders)
+        {
+            if (collider.tag == "EnemyTurtle" || collider.tag == "EnemySlime")
+            {
+                _canvas = collider.gameObject.GetComponentInChildren<CanvasGroup>();
+                
+                float distanceToEnemy = Vector3.Distance(transform.position, collider.transform.position);
+
+                if (distanceToEnemy <= distanceToShow)
+                {
+                    _canvas.alpha = 1;
+                }
+                else
+                {
+                    _canvas.alpha = 0;
+                }
+            }
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

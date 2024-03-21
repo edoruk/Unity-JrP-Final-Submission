@@ -11,6 +11,7 @@ TagManager:
   - EnemyTurtle
   - EnemySlime
   - QuestGiver
+  - FreeLookCamera
   layers:
   - Default
   - TransparentFX

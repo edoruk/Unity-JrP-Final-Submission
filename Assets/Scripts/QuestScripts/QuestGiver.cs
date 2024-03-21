@@ -17,7 +17,7 @@ public class QuestGiver : MonoBehaviour
     private QuestType questType = QuestType.Kill;
     private int goalAmound = 3;
 
-    private void Start()
+    private void Awake()
     {
         uiController = GameObject.Find("UIManager").GetComponent<UIController>();
         
@@ -50,20 +50,25 @@ public class QuestGiver : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
+        {
             onTrigger = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
+        {
             onTrigger = false;
+        }
     }
 
     private void ShowQuestToPlayer()
     {
         if (Input.GetKeyDown(KeyCode.E) && onTrigger)
         {
-            uiController._questCanvas.enabled = true;
+            uiController._questCanvas.gameObject.SetActive(true) ;
+            Debug.Log("show");
         }
     }
 
