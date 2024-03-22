@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     private float rotationSpeed = 2.0f;
     public float _jumpForce = 4.0f;
-    public float distanceToAttack = 1.5f;
+    public float distanceToAttack = 2.0f;
     private float distanceToShow = 4.0f;
     
     private Animator _animator;

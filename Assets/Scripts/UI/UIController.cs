@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private QuestGiver _questGiver;
     [SerializeField] private TextMeshProUGUI _questIsActive;
     [SerializeField] public TextMeshProUGUI _questCompletedText;
+    [SerializeField] private TextMeshProUGUI _questProgressText;
     
     private Button _acceptQuestButton;
     
@@ -25,14 +26,16 @@ public class UIController : MonoBehaviour
         _usageText.text = _usageTextBase;
         _usageText.enabled = false;
         _questCompletedText.enabled = false;
-        
+        _questProgressText.text = _questGiver.quest.ShowProgress();
+        _questProgressText.enabled = false;
+
         SetAndHideQuestWindow();
 
     }
 
     private void Update()
     {
-        SetIsActiveTextColor();
+        SetIsActive();
         SetCompletedQuestWindow();
     }
 
@@ -43,7 +46,6 @@ public class UIController : MonoBehaviour
         _questTitle.text = _questGiver.quest.Title;
         _questDescription.text = _questGiver.quest.Description;
         _questCanvas.gameObject.SetActive(false);
-        Debug.Log(_questDescription.text);
     }
 
     private void SetCompletedQuestWindow()
@@ -80,8 +82,14 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void SetIsActiveTextColor()
+    private void SetIsActive()
     {
+        if (_questGiver.quest.IsActive)
+        {
+            _questProgressText.text = _questGiver.quest.ShowProgress();
+            _questProgressText.enabled = true;
+        }
+        
         _questIsActive.color = _questGiver.quest.IsActive
             ? Color.green
             : Color.red;

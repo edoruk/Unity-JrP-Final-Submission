@@ -13,7 +13,7 @@ public class SpawnManagerController : MonoBehaviour
     private const float xRange = 5;
     private const float zRange = 3;
     private float startDelay = 2;
-    private float spawnInterval = 2;
+    private float spawnInterval = 6;
     private int enemyCount;
     private bool canSpawn = true; // Flag to control spawning
 
@@ -29,7 +29,7 @@ public class SpawnManagerController : MonoBehaviour
         while (true)
         {
             enemyCount = FindObjectsOfType<EnemyController>().Length;
-            if (enemyCount < 5 && canSpawn)
+            if (enemyCount < 3 && canSpawn)
             {
                 Spawn();
                 canSpawn = false; // Disable spawning until delay finishes
@@ -45,9 +45,10 @@ public class SpawnManagerController : MonoBehaviour
         Vector3 spawnPos = new Vector3(Random.Range(-xRange, xRange), 0, Random.Range(-zRange, zRange));
         int enemyIndex = Random.Range(0, enemyPrefabs.Length);
 
-        Instantiate(enemyPrefabs[enemyIndex],
+        GameObject enemy = Instantiate(enemyPrefabs[enemyIndex],
             spawnPos,
             enemyPrefabs[enemyIndex].transform.rotation);
+        enemy.GetComponent<EnemyController>().InitializeEnemy();
     }
 
 

@@ -68,7 +68,6 @@ public class QuestGiver : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && onTrigger)
         {
             uiController._questCanvas.gameObject.SetActive(true) ;
-            Debug.Log("show");
         }
     }
 

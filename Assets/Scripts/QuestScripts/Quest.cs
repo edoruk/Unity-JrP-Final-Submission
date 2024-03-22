@@ -18,4 +18,9 @@ public class Quest
         IsActive = false;
         Debug.Log(Title + " completed");
     }
+
+    public string ShowProgress()
+    {
+        return $"{QuestGoal.currentAmount}/{QuestGoal.goalAmount}";
+    }
 }

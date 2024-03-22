@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 5900044376045247538}
   - component: {fileID: 8665706958491556405}
   - component: {fileID: 3256804522570916228}
+  - component: {fileID: -3590203724978889271}
   m_Layer: 0
   m_Name: Enemy_Slime
   m_TagString: EnemySlime
@@ -317,7 +318,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445c0441c27144405af4728428e5a869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 6400595418802743667}
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatISGround:
+    serializedVersion: 2
+    m_Bits: 64
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 5
+  timeBetweenAttacks: 0
+  sightRange: 4
+  attackRange: 1
+  playerInSightRange: 0
+  playerInAttackRange: 0
 --- !u!135 &5900044376045247538
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -382,6 +397,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!195 &-3590203724978889271
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146457755182249382}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 10
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3439329834578177183
 GameObject:
   m_ObjectHideFlags: 0
